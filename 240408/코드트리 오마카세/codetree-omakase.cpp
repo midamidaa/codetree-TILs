@@ -4,8 +4,37 @@
 #include <algorithm>
 #include <map>
 #include <set>
+#include <fstream>
 
 using namespace std;
+
+/*
+int main() {
+    
+    ifstream fina;
+    ifstream finc;
+
+    fina.open("a.txt");
+    finc.open("c.txt");
+    int cnt = 0;
+    int a1, a2, c1, c2;
+    cout << "와일문전";
+    while ((fina >> a1 >> a2) &&(finc >> c1 >> c2) ){
+
+        cnt++;
+        if ((a1 != c1) || (a2 != c2)) {
+            cout << cnt <<'\n';
+            
+        }
+    }
+    fina.close();
+    finc.close();
+
+
+    
+}
+1185 1186 1187
+*/
 
 struct Query {
     int cmd;
@@ -37,7 +66,7 @@ map<string, int> exittime;
 set<string> names;
 map<string, int> pos;
 
-
+int shotcnt = 0;
 
 
 
@@ -92,7 +121,8 @@ int main() {
             if (chobaptime < persontime) {//초밥이먼저놓여짐
 
                 //111쿼리추가
-				chobappos += (persontime - chobaptime) % l;//2 teddy가 왓을때 초밥위치
+				chobappos += (persontime - chobaptime);
+                chobappos %= l;//2 teddy가 왓을때 초밥위치
                 if (personpos < chobappos) {
                     chobapx = persontime + personpos - chobappos + l;
                 }
@@ -133,13 +163,7 @@ int main() {
     ///queries 정렬
     sort(queries.begin(), queries.end(), cmp);
 
-    /*
-    for (int i = 0; i < queries.size(); i++) {
-        cout << queries[i].cmd << ' ' << queries[i].t << ' '<<queries[i].name<<'\n';
-    }
-    
-    cout << "쿼리출력완\n";
-    */
+ 
     int curchobap = 0;
     int curpeople = 0;
     ///queries 순회
@@ -147,7 +171,7 @@ int main() {
         if (queries[i].cmd == 100) {
             curchobap++;
         }
-        else if (queries[i].cmd == 111) {
+        else if (queries[i].cmd == 111) {//111이 중복
             curchobap--;
         }
         else if (queries[i].cmd == 200) {
@@ -157,6 +181,7 @@ int main() {
             curpeople--;
         }
         else if (queries[i].cmd == 300) {
+            
             cout << curpeople << ' ' << curchobap << '\n';
         }
     }
