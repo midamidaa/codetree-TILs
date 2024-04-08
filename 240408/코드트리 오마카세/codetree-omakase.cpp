@@ -7,8 +7,8 @@
 #include <fstream>
 
 using namespace std;
-
 /*
+
 int main() {
     
     ifstream fina;
@@ -33,9 +33,8 @@ int main() {
 
     
 }
-1185 1186 1187
-*/
 
+*/
 struct Query {
     int cmd;
     int t, x, n;
@@ -111,9 +110,10 @@ int main() {
     for (iter = names.begin(); iter != names.end(); iter++) {
         //사람별쿼리로 초밥 없어지는 시간계산
         string name = (*iter);
+        exittime[name] = 0;
         for (int i = 0; i < people[name].size(); i++) {
             int chobaptime = people[name][i].t;//2
-            long long chobappos = people[name][i].x;//2
+            int chobappos = people[name][i].x;//2
             int persontime = entertime[name];//8
             int personpos = pos[name];//3
             int chobapx;
@@ -145,7 +145,7 @@ int main() {
 
 
             }
-            exittime[name] = chobapx;//2
+            exittime[name] = max(chobapx,exittime[name]);//2먼저들어와도늦게없어질수잇음!!
             queries.push_back({ 111,chobapx,-1,-1,name});
 
         }
@@ -153,6 +153,7 @@ int main() {
     }
 
     //222
+    //스시가 모두 나타나긴 하지만 쿼리끝나기전에 다 없어지는건 아님.
     for (iter = names.begin(); iter != names.end(); iter++) {
         string name = (*iter);
         queries.push_back({ 222,exittime[name], -1, -1, name });
