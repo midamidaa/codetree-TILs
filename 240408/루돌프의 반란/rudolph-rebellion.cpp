@@ -58,11 +58,12 @@ int main() {
     int score = 0;
     int available_santa = p;
     for (int i = 1; i <= p; i++) {
-        int sr, sc;
+        int sr, sc,no;
+        cin >> no;
         cin >> sr >> sc;
-        board[sr][sc] = i;
-        santapos[i].first = sr;
-        santapos[i].second = sc;
+        board[sr][sc] = no;
+        santapos[no].first = sr;
+        santapos[no].second = sc;
     }
     //산타모두 탈락하면 break 
 
@@ -101,9 +102,11 @@ int main() {
         int rudir;
         int rux;
         int ruy;
+        closestdistance = (n + 1) * (n + 1) + (n + 1) * (n + 1);
 
         //가장 가까워지는 방향 찾음(max 8) 기록
         for (int j = 0; j < 8; j++) {
+
             int newr = (rudolfmove[j].first + rr);
             int newc = (rudolfmove[j].second + rc);
             int newd = (newr - santax) * (newr - santax) + (newc - santay)*(newc - santay);
