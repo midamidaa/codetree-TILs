@@ -113,7 +113,7 @@ int main() {
         string name = (*iter);
         for (int i = 0; i < people[name].size(); i++) {
             int chobaptime = people[name][i].t;//2
-            int chobappos = people[name][i].x;//2
+            long long chobappos = people[name][i].x;//2
             int persontime = entertime[name];//8
             int personpos = pos[name];//3
             int chobapx;
